@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.wrapper{
+    min-height: 100vh;
+    background: black;
+    color: white;
+}
+.header{
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(126, 252, 0, 0.377);
+    box-shadow: 0 2px 2px 2px rgba(102, 51, 153, 0.87), 0 4px 2px 2px rgba(153, 51, 153, 0.308);
+}
+.main{
+    padding: 40px 0;
+}
+#playground{
+    /* display: none; */
+    transition: 10s ease-in;
+}
+.form-label, .form-group,.playground{
+font-size: 32px;
+}
+/* .form-group{
+    background-color: lawngreen;
+    display: inline-block;
+    border-radius: 30%;
+} */
+.form-group{
+    height: 4.5rem;
+    max-width: 50rem;
+    border-radius: 4rem;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    margin:0 auto;
+    align-items: center;
+    background-color: lawngreen;
+    color:rgba(0,0,0,.87);
+    border: 1px solid #ddd;
+    padding: 0 1rem;
+}
+.form-group:hover{
+    background-color: rgb(101, 197, 5);
+}
+.form-group input{
+    height: 4.5rem;
+    width: 50rem;
+    outline: none;
+    border: none;
+    color:rgba(0,0,0,.87);
+    font-size: 16px;
+    line-height: 34px;
+    padding: 0 1rem;
+}
+.form-group button{
+    font-size: 16px;
+    height: 4.5rem;
+    background-color: lawngreen;
+    padding: 10px 20px;
+
+    outline: none;
+    border: none;
+}
+.form-group input,
+.form-group button{
+    outline: none;
+    height: 40px;
+}
+.playSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:32px
+}
+.played{
+    font-size: 18px;
+}
+.info,.score, .played{
+    padding: 20px 0;
+}
+.selection-images button{
+    border-radius: 4px;
+    border:none
+}
+.selection-images button img{
+    width: 100px;
+}

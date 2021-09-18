@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <h1>Welcome to Awesomeness!</h1>
+            <p>Take that much needed break, while away a few minues and delve into the world of RPS. 
+                <em>It's a suprisingly adictive world.:)</em></p>
+        </header>
+        <main class="main">
+            <p class="form-label">Ready to play!</p><br>
+            <div class="form-group">
+                <input type="text" name="" id="rounds">
+                <button>Play</button>
+            </div>
+            <div id="playground">
+                <p class="info" id="info">Its a tie!</p>
+                <div class="playSection">
+                    <div class="playersection">
+                        <p class="score">Player Score: <span id="playerScore">0</span></p>
+                        <div class="selection-images">
+                            <button id="rock"  data-button="rock"><img src="images/rock.png" alt="Rock"></button>
+                            <button id="paper"  data-button="paper"><img src="images/paper.png" alt="Paper"></button>
+                            <button id="scissors"  data-button="scissors"><img src="images/scissors.png" alt="Scissors"></button>
+                        </div>
+                        <p class="played">Player played <span id="playerPlayed">rock</span></p>
+                    </div>
+                    <div class="computersection">
+                        <p class="score">Computer Score: <span id="computerScore">0</span></p>
+                        <div class="selection-images">
+                            <button><img src="images/rock.png" alt="Rock"></button>
+                            <button><img src="images/paper.png" alt="Paper"></button>
+                            <button><img src="images/scissors.png" alt="Scissors"></button>
+                        </div>
+                        <p class="played">Computer played <span id="computerPlayed">rock</span></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer"></footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
