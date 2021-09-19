@@ -7,27 +7,24 @@
 
 .wrapper{
     min-height: 100vh;
-    background: black;
+    background: url('images/1.jpg');
     color: white;
 }
 .header{
     text-align: center;
     padding: 20px;
     background-color: rgba(126, 252, 0, 0.377);
-    box-shadow: 0 2px 2px 2px rgba(102, 51, 153, 0.87), 0 4px 2px 2px rgba(153, 51, 153, 0.308);
 }
 .main{
     padding: 40px 0;
+    min-height: calc(100vh - 95px);
+    background-color: rgba(0,0,0,.87);
 }
 #prompt{
     margin-bottom: 10px;
 }
 #prompt mark{
     padding: 10px;
-}
-#playground{
-    display: none;
-    transition: 10s ease-in;
 }
 .form-label, .form-group,.playground, #info{
     font-size: 32px;
@@ -51,7 +48,8 @@
     border: 1px solid #ddd;
     padding: 0 1rem;
 }
-.form-group:hover{
+.form-group:hover,
+.resetBtn:hover{
     background-color: rgb(101, 197, 5);
 }
 .form-group input{
@@ -77,6 +75,20 @@
 .form-group button{
     outline: none;
     height: 40px;
+}
+
+.resetBtn{
+    padding: 10px 15px;
+    border-radius: 15px;
+    border: 1px solid lawngreen;
+    font-size: 18px;
+    background-color: lawngreen;
+    color: black;
+}
+#playground{
+    display: none;
+    padding: 20px;
+    transition: .5s ease-in;
 }
 .playSection{
     display: flex;

@@ -118,8 +118,9 @@ function setGameOver() {
     scissorsBtn.removeEventListener('click', rockPaperScissors);
 
     resetButton = document.createElement('button');
+    resetButton.setAttribute('class', 'btn resetBtn');
     resetButton.textContent = 'Start new game';
-    playground.appendChild(resetButton);
+    playground.prepend(resetButton);
     resetButton.addEventListener('click', resetGame);
 }
 
@@ -141,6 +142,7 @@ function resetGame() {
     playground.style.display = "none";
     formGroup.style.visibility = "visible";
     rounds.value = '';
+    info.textContent = "";
 
     rockBtn.addEventListener('click', rockPaperScissors);
 
