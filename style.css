@@ -19,12 +19,18 @@
 .main{
     padding: 40px 0;
 }
+#prompt{
+    margin-bottom: 10px;
+}
+#prompt mark{
+    padding: 10px;
+}
 #playground{
-    /* display: none; */
+    display: none;
     transition: 10s ease-in;
 }
-.form-label, .form-group,.playground{
-font-size: 32px;
+.form-label, .form-group,.playground, #info{
+    font-size: 32px;
 }
 /* .form-group{
     background-color: lawngreen;
@@ -61,7 +67,7 @@ font-size: 32px;
 .form-group button{
     font-size: 16px;
     height: 4.5rem;
-    background-color: lawngreen;
+    background-color: transparent;
     padding: 10px 20px;
 
     outline: none;
@@ -91,4 +97,8 @@ font-size: 32px;
 }
 .selection-images button img{
     width: 100px;
+}
+
+.played{
+    max-width: 310px;
 }

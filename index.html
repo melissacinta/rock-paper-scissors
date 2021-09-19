@@ -15,13 +15,15 @@
                 <em>It's a suprisingly adictive world.:)</em></p>
         </header>
         <main class="main">
-            <p class="form-label">Ready to play!</p><br>
+            <p class="form-label">Ready to play?</p><br>
+            <p>Enter a number to begin. Winner is first to reach number</p>
+            <p id="prompt"></p>
             <div class="form-group">
-                <input type="text" name="" id="rounds">
-                <button>Play</button>
+                <input type="number" name="" id="rounds">
+                <button id="numRounds">Play</button>
             </div>
             <div id="playground">
-                <p class="info" id="info">Its a tie!</p>
+                <p class="info" id="info"></p>
                 <div class="playSection">
                     <div class="playersection">
                         <p class="score">Player Score: <span id="playerScore">0</span></p>
@@ -30,7 +32,7 @@
                             <button id="paper"  data-button="paper"><img src="images/paper.png" alt="Paper"></button>
                             <button id="scissors"  data-button="scissors"><img src="images/scissors.png" alt="Scissors"></button>
                         </div>
-                        <p class="played">Player played <span id="playerPlayed">rock</span></p>
+                        <p class="played"><span id="playerPlayed"></span></p>
                     </div>
                     <div class="computersection">
                         <p class="score">Computer Score: <span id="computerScore">0</span></p>
@@ -39,7 +41,7 @@
                             <button><img src="images/paper.png" alt="Paper"></button>
                             <button><img src="images/scissors.png" alt="Scissors"></button>
                         </div>
-                        <p class="played">Computer played <span id="computerPlayed">rock</span></p>
+                        <p class="played"><span id="computerPlayed"></span></p>
                     </div>
                 </div>
             </div>
