@@ -2,9 +2,6 @@ let submitBtn = document.querySelector("#numRounds");
 let playground = document.getElementById("playground");
 let rounds = document.getElementById("rounds");
 let formGroup = document.querySelector(".form-group");
-let rockBtn = document.getElementById("rock");
-let paperBtn = document.getElementById("paper");
-let scissorsBtn = document.getElementById("scissors");
 let playerScore = 0;
 let computerScore = 0;
 let scorePlayer = document.getElementById("playerScore");
@@ -14,7 +11,29 @@ let _prompt = document.getElementById("prompt");
 let computerPlayed = document.querySelector("#computerPlayed");
 let playerPlayed = document.querySelector("#playerPlayed");
 let resetButton;
+let computerBtns = document.querySelectorAll('.computer-btn')
+let playerBtns = document.querySelectorAll('.player-btn')
+let timesPlayed = 1;
 
+// function to remove animation from both player and computer
+function removeTransition(e) {
+    if(e.propertyName !== "transform") return;//skip if it is not a transform;
+    this.classList.remove('playing');
+}
+
+// function to animate computer selection
+function animateComputerBtns(e) {
+    let computerBtn = [...computerBtns]
+    if (e === "rock"){
+        computerBtn[0].classList.add('playing')
+    }else if(e === "paper"){
+        computerBtn[1].classList.add('playing')
+    }else{
+        computerBtn[2].classList.add('playing')
+    }
+}
+
+//function to get winning number
 function getNumRounds() {
 
     submitBtn.addEventListener('click', function getRounds() {
@@ -31,91 +50,99 @@ function getNumRounds() {
     });
     
 }
-getNumRounds();
+
+// function to get randomized computer selection
 function computerPlay() {
     let randomGuess = Math.floor(Math.random() * 1000) + 1;
     if (randomGuess % 3 === 0) {
-        // console.log("rock");
+        animateComputerBtns("rock")
         return "rock";
     } else if (randomGuess % 3 === 1) {
-        // console.log("paper");
+        animateComputerBtns("paper")
         return "paper";
     } else {
-        // console.log("scissors");
+        animateComputerBtns("scissors")
         return "scissors"
     }
 }
-rockBtn.addEventListener('click', rockPaperScissors);
-
-paperBtn.addEventListener('click', rockPaperScissors);
-
-scissorsBtn.addEventListener('click', rockPaperScissors);
-
-let timesPlayed = 1;
-
-function rockPaperScissors(computerSelection, playerSelection) {
-    console.log(" round is "+ rounds.value);
-    let numRound = rounds.value;
-    computerSelection = computerPlay();
-    console.log("computerSelection: " + computerSelection)
-    playerSelection = this.dataset.button;
-    console.log(playerSelection)
-    if (timesPlayed === 1){
+function updatedLogs(e) {
+    if (e === 1){//to initialize logging output on first play
         computerPlayed.textContent = "Computer played: ";
         playerPlayed.textContent = "Player played: ";
-    }
-
-    if (computerSelection === playerSelection) {
-        console.log("Draw! Please Play again!");
+    }else{
         computerPlayed.textContent += computerSelection+ ", ";
         playerPlayed.textContent += playerSelection+ ", ";
-        // return "Draw! Please Play again!";
+    }
+    return 
+}
 
+// main game body this function controls the game
+function rockPaperScissors(computerSelection, playerSelection) {
+    // assign the winning number in this case rounds to numRound
+    let numRound = rounds.value;
+
+    // get computer Selection
+    computerSelection = computerPlay();
+
+    // get player selection
+    playerSelection = this.dataset.button;
+
+    // add the class playing to the clicked button
+    this.classList.add('playing');
+
+    if (computerSelection === playerSelection) {
+        //if both players play the same thing then just update logs and do nothing else
+        computerPlayed.textContent += computerSelection+ ", ";
+        playerPlayed.textContent += playerSelection+ ", ";
     } else if ((computerSelection === "rock" && playerSelection === "paper") ||
         (computerSelection === "paper" && playerSelection === "scissors") ||
         (computerSelection === "scissors" && playerSelection === "rock") && 
         (computerScore <= numRound || playerScore <= numRound)) {
+            //but if player plays the winning hand while the winning score has not been 
+            // reached, increment player's score & update logs
         scorePlayer.textContent = ++playerScore;
-        computerPlayed.textContent += computerSelection+ ", ";
-        playerPlayed.textContent += playerSelection+ ", ";
+        
         if (playerScore>=numRound) {
+            // now if player's score is equal to the winning score update the info section and call the game over function.
             info.textContent = "Player wins with " + (playerScore-computerScore) + " points";
             setGameOver();
-            
         }
-        console.log("player wins")
-        // return playerScore;
 
     } else if ((computerSelection === "rock" && playerSelection === "scissors") ||
         (computerSelection === "paper" && playerSelection === "rock") ||
         (computerSelection === "scissors" && playerSelection === "paper") &&
          (computerScore <= numRound || playerScore <= numRound)) {
+             //but if computer plays the winning hand while the winning score has not been 
+            // reached, increment computer's score & update logs
         scoreComputer.textContent = ++computerScore;
         computerPlayed.textContent += computerSelection+ ", ";
         playerPlayed.textContent += playerSelection+ ", ";
 
         if (computerScore>=numRound) {
+            // and if player's score is equal to the winning score update the info section and call the game over function.
             info.textContent = "Computer wins with " + (computerScore - playerScore) + " points";
             setGameOver();
         }
-        console.log("computer wins")
-        // return computerScore;
 
     } else {
         console.log("incorrect input please choose either Rock, Paper or Scissors");
     }
 
+    // increment the number of times played by 1
     timesPlayed ++
-    // rounds.value = '';
+
+    // focucs on the round input box
     rounds.focus();
+   // add event listeners to selected player button to remove transitions
+   this.addEventListener('transitionend', removeTransition);
+    
+    // add event listeners to selected computer button to remove transitions
+    computerBtns.forEach(computerBtn => computerBtn.addEventListener('transitionend', removeTransition));
 }
 
+// function to show that the game is over and display reset button
 function setGameOver() {
-    rockBtn.removeEventListener('click', rockPaperScissors);
-
-    paperBtn.removeEventListener('click', rockPaperScissors);
-
-    scissorsBtn.removeEventListener('click', rockPaperScissors);
+    playerBtns.forEach(playerBtn => playerBtn.removeEventListener('click', rockPaperScissors))
 
     resetButton = document.createElement('button');
     resetButton.setAttribute('class', 'btn resetBtn');
@@ -124,6 +151,7 @@ function setGameOver() {
     resetButton.addEventListener('click', resetGame);
 }
 
+// function the refreshes the game for a new play
 function resetGame() {
     timesPlayed = 1;
     playerScore = 0;
@@ -143,15 +171,12 @@ function resetGame() {
     formGroup.style.visibility = "visible";
     rounds.value = '';
     info.textContent = "";
-
-    rockBtn.addEventListener('click', rockPaperScissors);
-
-    paperBtn.addEventListener('click', rockPaperScissors);
-
-    scissorsBtn.addEventListener('click', rockPaperScissors);
+    playerBtns.forEach(playerBtn => playerBtn.addEventListener('click', rockPaperScissors))
     rounds.focus();
-
-    // lastResult.style.backgroundColor = 'white';
-
-    // randomNumber = Math.floor(Math.random()*100) + 1;
 }
+
+// add event listeners to all players button to call the game method
+playerBtns.forEach(playerBtn => playerBtn.addEventListener('click', rockPaperScissors))
+
+
+getNumRounds();//get the winning number
